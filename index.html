@@ -17,7 +17,7 @@ body, input, select, label, button {
   font-family: 'HelveticaNeueW23', Arial, sans-serif;
   margin:0; padding:0;
 }
-header { background:#15445A; color:white; text-align:center; padding:15px; }
+header { background:#8A7230; color:white; text-align:center; padding:15px; }
 header h1 { margin:0; font-size:18px; }
 
 label {
@@ -150,7 +150,7 @@ button {
   <div><label>اسم الطالبة </label><input type="text"></div>
   <div><label>الصف</label><input type="text"></div>
   <div><label>اليوم</label><input type="text"></div>
-  <div><label>التاريخ</label><input type="text"></div>
+  <div><label>التاريخ</label><input type="text" id="dateInput"></div>
 </div>
 
 <!-- الصف الرابع: قوائم منسدلة 0%-100% -->
@@ -257,6 +257,16 @@ function updateChartAndInputs(){
   const layout = { margin:{l:40,r:20,b:40,t:40}, yaxis:{title:'النسبة %', range:[0,100]} };
   Plotly.newPlot('studentChart',[trace],layout,{displayModeBar:false,responsive:true, staticPlot:true});
 }
+
+// تعيين تاريخ اليوم تلقائيًا بصيغة d-m-y
+window.addEventListener('DOMContentLoaded', (event) => {
+  const today = new Date();
+  const day = String(today.getDate()).padStart(2, '0');
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const year = today.getFullYear();
+  const dateInput = document.getElementById('dateInput');
+  if(dateInput) dateInput.value = `${day}-${month}-${year}`;
+});
 
 // تهيئة أولية
 updateChartAndInputs();
